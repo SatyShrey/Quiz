@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quize</title>
+    <style>
+        main{
+            width: 750px;
+            height: 400px;
+            border-radius: 10px;
+            background-image:linear-gradient(skyblue,white);
+            margin: auto;
+        }
+        .section1{
+            display: grid;
+            grid-template-columns:6fr 6fr;
+            dl{
+                width: fit-content;
+                margin: auto;
+            }
+        }
+        dt{
+            margin: 10px;
+            font-size: larger;
+           font-weight: bold;
+           color: blueviolet;
+       }
+       dd{
+        color:rgb(32, 32, 88);
+        font-size: large;
+       }
+        .section2{
+            text-align: center;
+            color: blueviolet;
+            font-size: larger;
+            font-weight: bold;
+        }
+        h1{
+            color: purple;
+            text-shadow: black 2px 2px 2px;
+            text-align: center;
+        }
+        img{
+            width: 30%;
+        }
+        .section0{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            div{
+                color: red;
+                font-size: larger;
+                font-weight: bold;
+            }
+            span{
+                font-style: italic;
+            }
+        }
+        button{
+           background-color: rgb(62, 140, 250);
+           border:none;
+           width: 60px;
+           height: 30px;
+           border-radius:7px;
+           cursor: pointer;
+           color: white;
+           font-weight: bold;
+        }
+        button:active{
+            width: 55px;
+            height: 25px;
+        }
+        @media only screen and (max-width:600px){
+            main{
+                width: 100%;
+                height:100vh;
+                overflow: scroll;
+            }
+            .section1{
+                grid-template-columns: 12fr;
+                .section0{
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                }
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Quiz</h1>
+        <section class="section1">
+            <dl>
+                <dt></dt>
+                <dd>
+                    <div class="option1"></div>
+                    <div class="option2"></div>
+                    <div class="option3"></div>
+                    <div class="option4"></div>
+                </dd>
+            </dl>
+            <div class="section0"></div>
+        </section>
+        <section class="section2">
+            <button id="start" onclick="start()">Start</button>
+        </section>
+    </main>
+    <script>
+        var qna=[['What is the currency of Japan?','Yen','Dollar','Dirham','Yuan'],
+        ['In which year the Titanic sink?','1912','1920','1890','1812'],
+        ['What is the largest mammal in the world?','Elephant','Blue whale','Tiger','Giraffe'],
+        ['Which continent is known as the dark continent?','Africa','USA','Brazil','Russia'],
+        ['In share market what do the "bull" represent?','Downward trend','Upward trend','Both','None of the above.'],
+        ['Which is the oldest existing news paper in India?','Lokmat','Sandesh','The Hindu','Bombay Samachar'],
+        ['Which state of India is called the Botanist paradise?','Uttar Pradesh','Rajasthan','Sikkim','Goa'],
+        ['In which city can you find the river Thames?','London','Tokyo','Paris','New York'],
+        ['Who is the first winner of Param Vir Chakra?','Rama Raghoba Rane','Somnath Sharma','Karam Singh','Jadunath Singh'],
+        ['Choose an appropriate word for the picture below?<br><img src="/eth.jpg" alt="img">','Gold','Cryptocurrency','Bitcoin','None of the above.']];
+        //qna array containing all quations and answers...........................................................
+        var n=0;var sec=30; var count; var score=0;
+        var ans=['a','a','b','a','b','d','c','a','b','b'];//array for right answers..........................
+        var dt=document.querySelector('dt');
+        var opt1=document.querySelector('.option1');
+        var opt2=document.querySelector('.option2');
+        var opt3=document.querySelector('.option3');
+        var opt4=document.querySelector('.option4');
+        var section0=document.querySelector('.section0');
+        var section1=document.querySelector('.section1');
+        var section2=document.querySelector('.section2');
+        function start(){//start button.......................................................
+            next();
+            section2.innerHTML=`<button onclick='next()'>Next</button>`;
+        }
+        function next(){clearInterval(count);sec=30;//next button..................................................................
+           if(ans[n-1]){ if(document.getElementById(ans[n-1]).checked){score++;}}
+           if(n===(qna.length-1)){section2.innerHTML=`<button onclick='submit()'>Submit</button>`;}
+            dt.innerHTML=`Q${n+1}.${qna[n][0]}`;
+            opt1.innerHTML=`a.<input name='o'+${n} id='a' type='radio'><label>${qna[n][1]}</label>`;
+            opt2.innerHTML=`b.<input name='o'+${n} id='b' type='radio'><label>${qna[n][2]}</label>`;
+            opt3.innerHTML=`c.<input name='o'+${n} id='c' type='radio'><label>${qna[n][3]}</label>`;
+            opt4.innerHTML=`d.<input name='o'+${n} id='d' type='radio'><label>${qna[n][4]}</label>`;
+            n++;
+            count=setInterval(()=>{section0.innerHTML=`<span>Time left:</span><div>${sec}</div><span>sec</span>`;sec--;
+                if(sec==-1 && n===qna.length){submit();}
+                if(sec===-1){clearInterval(count);next();}
+            },1000);
+        }
+        function submit(){ //submit button.................................................................
+            if(document.getElementById(ans[n-1]).checked){score++;}
+            clearInterval(count);
+            section0.innerHTML='';
+            section1.innerHTML='';
+            section2.innerHTML=`Your score is ${score}<br><br><button onclick=exit()>Exit</button>`;
+        }
+        function exit(){//exit button...........................................................................
+            window.close();
+            location.reload();
+        }
+    </script>
+</body>
+</html>
