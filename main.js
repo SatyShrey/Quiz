@@ -11,8 +11,8 @@ var qna=[['What is the currency of Japan?','Yen','Dollar','Dirham','Yuan','a'],
         //qna array containing all quations and answers...........................................................
         var n=0;var sec=30;var marks=0;var timeout;
         var dl=document.querySelector('dl');
-        var ol=document.getElementById('list');
-        var section1=document.getElementById('section1')
+        var list=document.getElementById('list');
+        var section1=document.getElementById('section1');
         var section0=document.getElementById('section0');
         var section2=document.getElementById('section2');
         var selected='';
@@ -20,7 +20,7 @@ var qna=[['What is the currency of Japan?','Yen','Dollar','Dirham','Yuan','a'],
             
             createDl();
 
-            section2.innerHTML=`<button style='background-color: blue;' onclick='next()'>Next</button>`;
+            section2.innerHTML=`<button id='next' onclick='next()'>Next</button>`;
         }
         
         function createDl(){
@@ -30,8 +30,8 @@ var qna=[['What is the currency of Japan?','Yen','Dollar','Dirham','Yuan','a'],
             <dd>b.<input name='opt' id='b' type='radio'><span class='b'>${qna[n][2]}</span></dd>
             <dd>c.<input name='opt' id='c' type='radio'><span class='c'>${qna[n][3]}</span></dd>
             <dd>d.<input name='opt' id='d' type='radio'><span class='d'>${qna[n][4]}</span></dd>`;
-            if(n===qna.length-1){section2.innerHTML=`<button style='background-color: purple;' onclick='next()'>Submit</button>`;}
-            timeout=setInterval(()=>{section0.innerHTML=`<span>Timeout:&nbsp;</span><div>${sec}</div><span>&nbsp;sec</span>`; sec--; if(sec===-1){
+            if(n===qna.length-1){section2.innerHTML=`<button id='submit' onclick='next()'>Submit</button>`;}
+            timeout=setInterval(()=>{section0.innerHTML=`<div><span>Time Left:&nbsp;</span><div>${sec}</div><span>&nbsp;sec</span></div>`; sec--; if(sec===-1){
                 next();
             }},1000)
         }
@@ -44,20 +44,33 @@ var qna=[['What is the currency of Japan?','Yen','Dollar','Dirham','Yuan','a'],
                   selected=all[i].id;
                 }
             }
-            var color='red';
             var right=document.getElementById(qna[n][5]);
+            var color='red';
+            var tik='&#10008;';
             if(selected===right.id){
-                color='green';
+                color='green';tik='&#10004;';
             }else if(selected==='none'){
-                color='grey';
+                color='grey';tik='---';
             }
 
-            var li=document.createElement('li');
-            li.style.color=color;
-            li.innerHTML=`Q${n+1}.${qna[n][0]}<br>Options:(${qna[n][1]},${qna[n][2]},${qna[n][3]},${qna[n][4]})<br>
-            Right answer: ${qna[n][5]},&nbsp; You selected:${selected}<br><br>`;
+            var div=document.createElement('div');
+            div.setAttribute('class','div');
+            div.style.color=color;
+            div.innerHTML=`
+    <div><div class='Q'>Q${n+1}.${qna[n][0]}</div>
+      <table class='opn'>
+          <tr><td class='td1'>Options:</td><td></td></tr>
+          <tr><td>a)${qna[n][1]}</td><td>b)${qna[n][2]}</td></tr>
+          <tr><td>c)${qna[n][3]}</td><td>d)${qna[n][4]}</td></tr>
+      </table>
+      <div class='right'>Right answer: ${qna[n][5]}</div>
+   </div>
+   <div style='color:${color}'>
+    <div>Your selection:${selected}</div>
+    <div class='tik'>${tik}</div>
+  </div>`;
 
-            ol.appendChild(li);
+            list.appendChild(div);
 
             if(right.checked){
                 marks++;
@@ -65,7 +78,7 @@ var qna=[['What is the currency of Japan?','Yen','Dollar','Dirham','Yuan','a'],
             n++;sec=30;
             if(n<qna.length){createDl();}
             else{clearInterval(timeout);section1.innerHTML='';
-                section2.innerHTML=`<div>Your score is ${marks}</div><p>Quiz feedback</p>`;
-                ol.style.display=`block`;
+                section2.innerHTML=`<div class='score'>Your score is <div>${marks}</div></div><span class='feed'>Quiz feedback</span>`;
+                list.style.display=`block`;
             }
         }
