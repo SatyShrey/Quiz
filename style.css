@@ -5,7 +5,7 @@ main{
     background-image:linear-gradient(skyblue,white);
     margin: auto;
 }
-.section1{
+#section1{
     display: grid;
     grid-template-columns:6fr 6fr;
     dl{
@@ -23,7 +23,7 @@ dd{
 color:rgb(32, 32, 88);
 font-weight: bold;
 }
-.section2{
+#section2{
     text-align: center;
     color: blueviolet;
     font-size: larger;
@@ -37,10 +37,13 @@ h1{
  img{
     width: 30%;
 }
-ol img{
-    width:100px;
-}
-.section0{
+ol{
+    display: none;
+    img{
+        width:100px;
+    }
+} 
+#section0{
     display: flex;
     align-items: center;
     justify-content: center;
