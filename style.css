@@ -71,6 +71,9 @@ main{
 .right{
     color: green;
 }
+.right,.select{
+    text-align: center;
+}
 #section1{
     display: grid;
     grid-template-columns:6fr 6fr;

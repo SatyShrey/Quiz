@@ -66,7 +66,7 @@ var qna=[['What is the currency of Japan?','Yen','Dollar','Dirham','Yuan','a'],
       <div class='right'>Right answer: ${qna[n][5]}</div>
    </div>
    <div style='color:${color}'>
-    <div>Your selection:${selected}</div>
+    <div class='select'>Your selection:${selected}</div>
     <div class='tik'>${tik}</div>
   </div>`;
 
