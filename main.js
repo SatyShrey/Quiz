@@ -7,7 +7,7 @@ var qna=[['What is the currency of Japan?','Yen','Dollar','Dirham','Yuan','a'],
         ['Which state of India is called the Botanist paradise?','Uttar Pradesh','Rajasthan','Sikkim','Goa','c'],
         ['In which city can you find the river Thames?','London','Tokyo','Paris','New York','a'],
         ['Who is the first winner of Param Vir Chakra?','Rama Raghoba Rane','Somnath Sharma','Karam Singh','Jadunath Singh','b'],
-        ['Choose an appropriate word for the picture below?<br><img src="/eth.jpg" alt="img">','Gold','Cryptocurrency','Bitcoin','None of the above.','b']];
+        [`Choose an appropriate word for the picture below?<br><img src='eth.jpg' alt='image'>`,'Gold','Cryptocurrency','Bitcoin','None of the above.','b']];
         //qna array containing all quations and answers...........................................................
         var n=0;var sec=30;var marks=0;var timeout;
         var dl=document.querySelector('dl');
@@ -17,6 +17,7 @@ var qna=[['What is the currency of Japan?','Yen','Dollar','Dirham','Yuan','a'],
         var section2=document.getElementById('section2');
         var selected='';
         function start(){//start button.......................................................
+
             
             createDl();
 
