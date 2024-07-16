@@ -1,4 +1,10 @@
 
+body{
+    background-image: url(bg.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat:no-repeat ;
+}
 
 main{
     width: 750px;
@@ -6,9 +12,6 @@ main{
     min-height: 400px;
     border-radius: 10px;
     margin: auto;
-    background-attachment: fixed;
-    background-size: cover;
-    background-repeat:no-repeat ;
     background-color: skyblue;
     
     #next{
